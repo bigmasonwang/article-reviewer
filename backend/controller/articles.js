@@ -13,7 +13,7 @@ const getAllArticles = (req, res, next) => {
 };
 
 //POST '/articles'
-const newArticle = (req, res, next) => {
+const postNewArticle = (req, res, next) => {
   const article = new Article({
     created_at: moment().format('MMMM Do YYYY, h:mm:ss a').toString(),
     updated_at: moment().format('MMMM Do YYYY, h:mm:ss a').toString(),
@@ -39,7 +39,7 @@ const getOneArticle = (req, res, next) => {
 };
 
 //POST '/articles/:name'
-const newComment = (req, res, next) => {
+const postNewComment = (req, res, next) => {
   res.json({ message: 'POST 1 article comment' });
 };
 
@@ -48,12 +48,18 @@ const deleteOneArticle = (req, res, next) => {
   res.json({ message: 'DELETE 1 article' });
 };
 
+//PATCH '/articles/:id'
+const patchOneArticle = (req, res, next) => {
+  res.json({ message: 'PATCH 1 article' });
+};
+
 //export controller functions
 module.exports = {
   getAllArticles,
-  newArticle,
+  postNewArticle,
   deleteAllArticles,
   getOneArticle,
-  newComment,
+  postNewComment,
   deleteOneArticle,
+  patchOneArticle,
 };
