@@ -6,6 +6,9 @@ var logger = require('morgan');
 var cors = require('cors');
 const mongoose = require('mongoose');
 
+var indexRouter = require('./routes/index');
+var apiRouter = require('./routes/api');
+
 const url = 'mongodb://127.0.0.1:27017/articlesAPI';
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
@@ -15,10 +18,6 @@ db.once('open', () => {
 db.on('error', (err) => {
   console.error('connection error:', err);
 });
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var articlesRouter = require('./routes/articles');
 
 var app = express();
 
@@ -34,8 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/articles', articlesRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -54,6 +52,6 @@ app.use(function (err, req, res, next) {
 });
 
 const port = process.env.PORT || '5000';
-app.listen(port, ()=>{
+app.listen(port, () => {
   console.log(`Running on port: ${port}`);
 });
