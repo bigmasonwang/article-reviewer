@@ -24,7 +24,7 @@ const postNewArticle = (req, res, next) => {
       console.error(err);
       return res.send(err);
     }
-    return res.sendStatus(201);
+    return res.status(201).json(article);
   });
 };
 
@@ -33,17 +33,25 @@ const deleteAllArticles = (req, res, next) => {
   res.json({ message: 'DELETE all articles' });
 };
 
-//GET '/articles/:name'
+//GET '/articles/:id'
 const getOneArticle = (req, res, next) => {
-  res.json({ message: 'GET 1 article' });
+  Article.findById(req.params.id, (err, article) => {
+    if (err) {
+      return res.send(err);
+    }
+    if (article) {
+      return res.json(article);
+    }
+    return res.sendStatus(404);
+  });
 };
 
-//POST '/articles/:name'
+//POST '/articles/:id'
 const postNewComment = (req, res, next) => {
   res.json({ message: 'POST 1 article comment' });
 };
 
-//DELETE '/articles/:name'
+//DELETE '/articles/:id'
 const deleteOneArticle = (req, res, next) => {
   res.json({ message: 'DELETE 1 article' });
 };

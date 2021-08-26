@@ -13,3 +13,9 @@
 | [localhost:3000/api/articles/:id](http://localhost:3000/api/articles/:id) | DELETE      | DELETE 1 articles       |
 | [localhost:3000/api/articles/:id](http://localhost:3000/api/articles/:id) | PATCH | PATCH 1 articles |
 
+
+
+## TDD
+
+jest supertest
+
